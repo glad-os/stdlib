@@ -116,8 +116,8 @@ stdlib-32: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_32) stdlib
 stdlib-64: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_64) stdlib
 
 stdlib:
-	${AR} cr ${STDLIB_HOME}/stdlib.a ${STDLIB_HOME}/c/common/*.o ${STDLIB_HOME}/c/$(ISA_TYPE)-bit/*.o 
-	$(OBJDUMP) -D stdlib.a > stdlib.list
+	${AR} cr ${STDLIB_HOME}/stdlib-$(ISA_TYPE).a ${STDLIB_HOME}/c/common/*.o ${STDLIB_HOME}/c/$(ISA_TYPE)-bit/*.o 
+	$(OBJDUMP) -D stdlib-$(ISA_TYPE).a > stdlib-$(ISA_TYPE).list
 
 $(STDLIB_HOME)/c/common/%.o : $(STDLIB_HOME)/c/common/%.c
 	$(GCC) -c $(STDLIB_FLAGS_C) $< -o $@  

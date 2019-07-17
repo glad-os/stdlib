@@ -16,8 +16,7 @@
 
 
 #include "stdio.h"
-#include "swis.h"
-#include "kernel.h"
+#include "swi.h"
 #include <stdint.h>
 
 
