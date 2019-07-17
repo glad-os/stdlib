@@ -18,6 +18,7 @@
 #include "stdio.h"
 #include "swis.h"
 #include "kernel.h"
+#include <stdint.h>
 
 
 int sprintf( char *s )
@@ -26,7 +27,7 @@ int sprintf( char *s )
 	struct _kernel_regs in,out;
 	unsigned int return_value;
 
-	in.r[ 0 ] = (unsigned int) s;
+	in.r[ 0 ] = (uintptr_t) s;
 	SWI( OS_PrintString, &in, &out );
 
 	return_value = 0;
