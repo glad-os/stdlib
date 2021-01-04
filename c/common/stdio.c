@@ -20,17 +20,22 @@
 #include <stdint.h>
 
 
-int sprintf( char *s )
+unsigned int sprintf( char *str )
 {
 
-	struct _kernel_regs in,out;
-	unsigned int return_value;
+        unsigned int result;
 
-	in.r[ 0 ] = (uintptr_t) s;
-	SWI( OS_PrintString, &in, &out );
+        __asm__ __volatile__ ( 
+        "MOV r0, %[str]      \n\t" 
+        "SWI %[swi]          \n\t"
+        "MOV %[result], r0   \n\t"
+        :   [result] "=r" ( result )                    /* output operands */
+        :   [str]    "r"  ( str ),                      /* input operands */
+            [swi]    "I"  ( OS_PrintString )
+        :                                               /* no clobber */
+        );
 
-	return_value = 0;
-	return return_value;
+        return result;
 
 }
 
@@ -78,10 +83,14 @@ int sprintf_i( char *s, int i )
 int getchar( void )
 {
 
+    /*
     struct _kernel_regs in, out;
     _kernel_swi( OS_ReadC, &in, &out );
 
     return out.r[ 0 ];
+    */
+
+    return 65;
 
 }
 
@@ -156,5 +165,3 @@ char *gets( char *s )
 	return s;
 	
 }
-
-

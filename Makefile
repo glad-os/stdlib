@@ -67,8 +67,6 @@ FLAGS_A_32			= $(ARCH_32) -O$(OPTIMIZE) -D ISA_TYPE=$(ISA_TYPE)
 32-bit: FLAGS_C			= $(FLAGS_C_32)
 32-bit: FLAGS_A			= $(FLAGS_A_32)
 
-32-bit: INCLUDE_DIR		= c/32-bit/include
-
 # -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
 
 # 64-bit
@@ -105,18 +103,19 @@ clean:
 
 # stdlib
 STDLIB_HOME 			= .
-STDLIB_INCLUDES			= -I $(STDLIB_HOME)/c/common/include -I $(STDLIB_HOME)/$(INCLUDE_DIR)
+STDLIB_INCLUDES			= -I $(STDLIB_HOME)/c/common/include
 
 STDLIB_FILES_C_COMMON		= $(patsubst %.c,%.o,$(shell find c/common   -type f -name '*.c'))
 STDLIB_FILES_C_32		= $(patsubst %.c,%.o,$(shell find c/32-bit   -type f -name '*.c'))
 STDLIB_FILES_C_64		= $(patsubst %.c,%.o,$(shell find c/64-bit   -type f -name '*.c'))
 STDLIB_FLAGS_C	 		= $(FLAGS_C) $(STDLIB_INCLUDES)
 
-stdlib-32: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_32) stdlib
+#stdlib-32: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_32) stdlib
+stdlib-32: $(STDLIB_FILES_C_COMMON) stdlib
 stdlib-64: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_64) stdlib
 
 stdlib:
-	${AR} cr ${STDLIB_HOME}/stdlib-$(ISA_TYPE).a ${STDLIB_HOME}/c/common/*.o ${STDLIB_HOME}/c/$(ISA_TYPE)-bit/*.o 
+	${AR} cr ${STDLIB_HOME}/stdlib-$(ISA_TYPE).a ${STDLIB_HOME}/c/common/*.o
 	$(OBJDUMP) -D stdlib-$(ISA_TYPE).a > stdlib-$(ISA_TYPE).list
 
 $(STDLIB_HOME)/c/common/%.o : $(STDLIB_HOME)/c/common/%.c
