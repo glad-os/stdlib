@@ -95,73 +95,54 @@ int getchar( void )
 }
 
 
-/*
-char *gets( char *s )
-{
-
-	char *ptr = s;
-	int rd;
- 
-	while ( ( ( rd = getchar() )  != 0x0a ) ) {
-		*ptr++ = rd;
-	}
- 
-	*ptr = '\0';
-	return s;
-
-}
-*/
-
-
 char *gets( char *s )
 {
 	
-	int  index, line_terminated, render;
-	char next, printme[2];
+    int  index, line_terminated, render;
+    char next, printme[2];
 
     index = line_terminated = 0;
-	while ( !line_terminated )
+    while ( !line_terminated )
+    {
+		
+        next   = getchar();
+	render = 0;
+
+	if ( next == 0x0a )
 	{
-		
-		next   = getchar();
-		render = 0;
-
-		if ( next == 0x0a )
+            s[index++] = 0x00;
+            line_terminated = 1;
+	}
+	else
+	{
+            if ( next == 0x7f )
+            {
+                if (index > 0)
 		{
-			s[index++] = 0x00;
-			line_terminated = 1;
+                    index--;
+                    render = 1;
 		}
-		else
+            }
+            else
+            {
+                if ( index < 255 )
 		{
-			if ( next == 0x7f )
-			{
-				 if (index > 0)
-				 {
-				 	index--;
-				 	render = 1;
-				 }
-			}
-			else
-			{
-				if ( index < 255 )
-				{
-					s[index++] = next;
-					render = 1;
-				}
-			}
+                    s[index++] = next;
+                    render = 1;
 		}
-
-		if ( render )
-		{
-			printme[0] = next;
-			printme[1] = 0x00;
-			sprintf( printme );
-		}
-		
+            }
 	}
 
-    sprintf( "\n" );	
+	if ( render )
+	{
+            printme[0] = next;
+            printme[1] = 0x00;
+            sprintf( printme );
+	}
+		
+    }
 
-	return s;
+    sprintf( "\n" );	
+    return s;
 	
 }
