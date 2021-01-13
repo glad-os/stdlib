@@ -20,7 +20,7 @@
 
 	unsigned int sprintf( char *str );
 	int sprintf_i( char *s, int i );
-        int getchar( void );
+        unsigned int getchar( void );
         char *gets( char *s );
 
 #endif /*STDIO_H*/

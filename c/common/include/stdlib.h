@@ -21,5 +21,7 @@
 	// atoi, atof
 	int atoi( const char *s );
 	double atof( const char *s );
+        unsigned int fork( const char *str );
+        void process_exit( void );
 
 #endif /*STDLIB_H*/

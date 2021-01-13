@@ -23,19 +23,19 @@
 unsigned int sprintf( char *str )
 {
 
-        unsigned int result;
+    unsigned int result;
 
-        __asm__ __volatile__ ( 
-        "MOV r0, %[str]      \n\t" 
-        "SWI %[swi]          \n\t"
-        "MOV %[result], r0   \n\t"
-        :   [result] "=r" ( result )                    /* output operands */
-        :   [str]    "r"  ( str ),                      /* input operands */
-            [swi]    "I"  ( OS_PrintString )
-        :                                               /* no clobber */
-        );
+    __asm__ __volatile__ ( 
+    "MOV r0, %[str]      \n\t" 
+    "SWI %[swi]          \n\t"
+    "MOV %[result], r0   \n\t"
+    :   [result] "=r" ( result )                    /* output operands */
+    :   [str]    "r"  ( str ),                      /* input operands */
+        [swi]    "I"  ( OS_PrintString )
+    :                                               /* no clobber */
+    );
 
-        return result;
+    return result;
 
 }
 
@@ -80,17 +80,20 @@ int sprintf_i( char *s, int i )
 }
 
 
-int getchar( void )
+unsigned int getchar( void )
 {
 
-    /*
-    struct _kernel_regs in, out;
-    _kernel_swi( OS_ReadC, &in, &out );
+        unsigned int result;
 
-    return out.r[ 0 ];
-    */
+        __asm__ __volatile__ ( 
+        "SWI %[swi]          \n\t"
+        "MOV %[result], r0   \n\t"
+        :   [result] "=r" ( result )                    /* output operands */
+        :   [swi]    "I"  ( OS_ReadC )                  /* input operands */
+        :                                               /* no clobber */
+        );
 
-    return 65;
+        return result;
 
 }
 

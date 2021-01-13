@@ -16,6 +16,7 @@
 
 
 #include "stdlib.h"
+#include "swi.h"
 #include "stdio.h"
 
 
@@ -40,5 +41,40 @@ double atof( const char *s )
 	sprintf( "atof not done yet\n" );
 
 	return 0.0;
+
+}
+
+
+unsigned int fork( const char *str )
+{
+
+    unsigned int result;
+
+    __asm__ __volatile__ ( 
+    "MOV r0, %[str]      \n\t" 
+    "SWI %[swi]          \n\t"
+    "MOV %[result], r0   \n\t"
+    :   [result] "=r" ( result )                    /* output operands */
+    :   [str]    "r"  ( str ),                      /* input operands */
+        [swi]    "I"  ( OS_ProcessBegin )
+    :                                               /* no clobber */
+    );
+
+    return result;
+
+}
+
+
+
+void process_exit( void )
+{
+
+    __asm__ __volatile__ ( 
+    "SWI %[swi]          \n\t"
+    :                                               /* output operands */
+    :                                               /* input operands */
+        [swi]    "I"  ( OS_ProcessExit )
+    :                                               /* no clobber */
+    );
 
 }
