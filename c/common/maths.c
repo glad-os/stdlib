@@ -22,7 +22,7 @@
 double fabs( double i )
 {
 
-	sprintf( "fabs not done yet\n" );
+	printf( "fabs not done yet\n" );
 	return 0.0;
 
 }
@@ -31,7 +31,7 @@ double fabs( double i )
 int abs( int i )
 {
 
-	sprintf( "abs not done yet\n" );
+	printf( "abs not done yet\n" );
 	return 0;
 
 }
@@ -40,7 +40,7 @@ int abs( int i )
 double cos( double i )
 {
 
-	sprintf( "cos not done yet\n" );
+	printf( "cos not done yet\n" );
 	return 0.0;
 
 }
@@ -49,7 +49,7 @@ double cos( double i )
 int floor( double i )
 {
 
-	sprintf( "floor not done yet\n" );
+	printf( "floor not done yet\n" );
 	return 0;
 
 }
@@ -78,7 +78,7 @@ unsigned int rand( void )
 double sin( double i )
 {
 
-	sprintf( "sin not done yet\n" );
+	printf( "sin not done yet\n" );
 	return 0.0;
 
 }
@@ -87,7 +87,7 @@ double sin( double i )
 double sqrt( double i )
 {
 
-	sprintf( "sqrt not done yet\n" );
+	printf( "sqrt not done yet\n" );
 	return i;
 
 }
@@ -96,7 +96,7 @@ double sqrt( double i )
 unsigned int isnan( double i )
 {
 
-	sprintf( "isnan not done yet\n" );
+	printf( "isnan not done yet\n" );
 	return 0;
 
 }
@@ -105,7 +105,7 @@ unsigned int isnan( double i )
 double tan( double i )
 {
 
-	sprintf( "tan not done yet\n" );
+	printf( "tan not done yet\n" );
 	return 0.0;
 
 }

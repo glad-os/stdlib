@@ -19,8 +19,7 @@
 #include "swi.h"
 #include <stdint.h>
 
-
-unsigned int sprintf( char *str )
+unsigned int printf( char *str )
 {
 
     unsigned int result;
@@ -40,7 +39,7 @@ unsigned int sprintf( char *str )
 }
 
 
-int sprintf_i( char *s, int i )
+unsigned int sprintf_i( char *s, int i )
 {
 
 	// just get it working for now
@@ -79,8 +78,7 @@ int sprintf_i( char *s, int i )
 
 }
 
-
-unsigned int getchar( void )
+char getchar( void )
 {
 
         unsigned int result;
@@ -96,6 +94,7 @@ unsigned int getchar( void )
         return result;
 
 }
+
 
 
 char *gets( char *s )
@@ -140,12 +139,12 @@ char *gets( char *s )
 	{
             printme[0] = next;
             printme[1] = 0x00;
-            sprintf( printme );
+            printf( printme );
 	}
 		
     }
 
-    sprintf( "\n" );	
+    printf( "\n" );	
     return s;
 	
 }

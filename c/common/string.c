@@ -196,7 +196,7 @@ char *strcat (char *pDest, const char *pSrc)
 char *strncat( char *s, char *ct, unsigned int n )
 {
 
-	sprintf( "strncat not done yet\n" );
+	printf( "strncat not done yet\n" );
 
 	return s;
 

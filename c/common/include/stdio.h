@@ -18,9 +18,9 @@
 #ifndef STDIO_H
 #define STDIO_H
 
-	unsigned int sprintf( char *str );
-	int sprintf_i( char *s, int i );
-        unsigned int getchar( void );
+	unsigned int printf( char *str );
+	unsigned int sprintf_i( char *s, int i );
+        char getchar( void );
         char *gets( char *s );
 
 #endif /*STDIO_H*/

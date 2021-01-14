@@ -38,7 +38,7 @@ int atoi( const char *s )
 double atof( const char *s )
 {
 
-	sprintf( "atof not done yet\n" );
+	printf( "atof not done yet\n" );
 
 	return 0.0;
 
