@@ -15,11 +15,13 @@
  */
 
 
+
 #include "stdio.h"
 #include "swi.h"
-#include <stdint.h>
 
-unsigned int printf( char *str )
+
+
+int printf( char *str )
 {
 
     unsigned int result;
@@ -34,12 +36,12 @@ unsigned int printf( char *str )
     :                                               /* no clobber */
     );
 
-    return result;
+    return (int) result;
 
 }
 
 
-unsigned int sprintf_i( char *s, int i )
+int sprintf_i( char *s, int i )
 {
 
 	// just get it working for now
@@ -74,11 +76,11 @@ unsigned int sprintf_i( char *s, int i )
 	*s = 0;
 	length++;
 
-	return length;
+	return 0;
 
 }
 
-char getchar( void )
+int getchar( void )
 {
 
         unsigned int result;
@@ -91,7 +93,7 @@ char getchar( void )
         :                                               /* no clobber */
         );
 
-        return result;
+        return (int) result;
 
 }
 

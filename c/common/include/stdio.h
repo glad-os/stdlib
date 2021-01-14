@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
+#include "stddef.h"
 
 #ifndef STDIO_H
 #define STDIO_H
 
-	unsigned int printf( char *str );
-	unsigned int sprintf_i( char *s, int i );
-        char getchar( void );
+	int printf( char *str );
+	int sprintf_i( char *s, int i );
+        int getchar( void );
         char *gets( char *s );
 
 #endif /*STDIO_H*/
