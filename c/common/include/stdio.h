@@ -23,5 +23,7 @@
 	int sprintf_i( char *s, int i );
         int getchar( void );
         char *gets( char *s );
+        int setcolour( unsigned int f, unsigned int r, unsigned int g, unsigned int b );
+        int cls( void );
 
 #endif /*STDIO_H*/

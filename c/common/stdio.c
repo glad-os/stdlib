@@ -150,3 +150,43 @@ char *gets( char *s )
     return s;
 	
 }
+
+
+
+int setcolour( unsigned int f, unsigned int r, unsigned int g, unsigned int b )
+{
+
+    unsigned int result;
+
+    // note: r0-r3 are already in place at this point
+    __asm__ __volatile__ ( 
+    "SWI %[swi]          \n\t"
+    "MOV %[result], r0   \n\t"
+    :   [result] "=r" ( result )                    /* output operands */
+    :       [swi]    "I"  ( OS_SetColour )
+    :                                               /* no clobber */
+    );
+
+    return (int) result;
+
+}
+
+
+
+int cls( void )
+{
+
+    unsigned int result;
+
+    // note: r0-r3 are already in place at this point
+    __asm__ __volatile__ ( 
+    "SWI %[swi]          \n\t"
+    "MOV %[result], r0   \n\t"
+    :   [result] "=r" ( result )                    /* output operands */
+    :   [swi]    "I"  ( OS_ClearScreen )
+    :                                               /* no clobber */
+    );
+
+    return (int) result;
+
+}

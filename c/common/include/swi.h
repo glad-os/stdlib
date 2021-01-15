@@ -23,18 +23,15 @@
 #define SWI_H
 
 	// SWI allocations
-	#define		OS_SetMode				0x00000000
-	#define		OS_SetColour				0x00000001
+	#define		OS_PrintString				0x00000000
+	#define		OS_PrintChar				0x00000001
 	#define		OS_ClearScreen				0x00000002
-	#define		OS_PutPixel				0x00000003
-	#define		OS_GetPixel				0x00000004
-	#define		OS_SetCursorPosition			0x00000005
-	#define		OS_PrintChar				0x00000006
-	#define		OS_PrintString				0x00000007
-	#define		OS_ReadVideoVariables			0x00000008
-	#define		OS_ReadC                                0x00000009
-	#define		OS_ProcessBegin				0x0000000a
-	#define		OS_ProcessExit				0x0000000b
+	#define		OS_SetColour				0x00000003
+
+	#define		OS_ReadC                                0x00000004
+
+	#define		OS_ProcessBegin				0x00000005
+	#define		OS_ProcessExit				0x00000006
 
 
 
