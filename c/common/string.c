@@ -32,6 +32,7 @@ char *strchr( char *str, char c )
 
 }
 
+
 unsigned int strncmp( const char *str1, const char *str2, unsigned int n )
 {
 
@@ -41,6 +42,7 @@ unsigned int strncmp( const char *str1, const char *str2, unsigned int n )
 	return 0;
 
 }
+
 
 void *memmove( void *destaddr, void *sourceaddr, unsigned int length )
 {
@@ -69,6 +71,7 @@ void *memmove( void *destaddr, void *sourceaddr, unsigned int length )
 // from USPiEnv
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+
 void *memcpy( void *dst, void *src, unsigned int n )
 {
 
@@ -83,6 +86,7 @@ void *memcpy( void *dst, void *src, unsigned int n )
 	return dst;
 }
 
+
 int strlen (const char *pString)
 {
 
@@ -96,6 +100,7 @@ int strlen (const char *pString)
 	return nResult;
 
 }
+
 
 int strcmp (const char *pString1, const char *pString2)
 {
@@ -129,6 +134,7 @@ int strcmp (const char *pString1, const char *pString2)
 
 }
 
+
 char *strcpy (char *pDest, const char *pSrc)
 {
 
@@ -144,6 +150,7 @@ char *strcpy (char *pDest, const char *pSrc)
 	return pDest;
 
 }
+
 
 char *strncpy (char *pDest, const char *pSrc, unsigned long nMaxLen)
 {
@@ -170,6 +177,7 @@ char *strncpy (char *pDest, const char *pSrc, unsigned long nMaxLen)
 
 }
 
+
 char *strcat (char *pDest, const char *pSrc)
 {
 
@@ -191,7 +199,9 @@ char *strcat (char *pDest, const char *pSrc)
 
 }
 
+
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 
 char *strncat( char *s, char *ct, unsigned int n )
 {
@@ -201,6 +211,7 @@ char *strncat( char *s, char *ct, unsigned int n )
 	return s;
 
 }
+
 
 char *strstr( char *cs, char *ct )
 {

@@ -103,15 +103,15 @@ clean:
 
 # stdlib
 STDLIB_HOME 			= .
-STDLIB_INCLUDES			= -I $(STDLIB_HOME)/c/common/include
+STDLIB_INCLUDES			= -I $(STDLIB_HOME)/c/common/include -I $(STDLIB_HOME)/c/$(ISA_TYPE)-bit/include
 
 STDLIB_FILES_C_COMMON		= $(patsubst %.c,%.o,$(shell find c/common   -type f -name '*.c'))
 STDLIB_FILES_C_32		= $(patsubst %.c,%.o,$(shell find c/32-bit   -type f -name '*.c'))
 STDLIB_FILES_C_64		= $(patsubst %.c,%.o,$(shell find c/64-bit   -type f -name '*.c'))
 STDLIB_FLAGS_C	 		= $(FLAGS_C) $(STDLIB_INCLUDES)
 
-#stdlib-32: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_32) stdlib
-stdlib-32: $(STDLIB_FILES_C_COMMON) stdlib
+stdlib-32: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_32) stdlib
+#stdlib-32: $(STDLIB_FILES_C_COMMON) stdlib
 stdlib-64: $(STDLIB_FILES_C_COMMON) $(STDLIB_FILES_C_64) stdlib
 
 stdlib:

@@ -15,24 +15,21 @@
  */
 
 
+#ifndef SVC_H
+#define SVC_H
 
 
+    #include "svc-macros.h"
 
 
-#ifndef SWI_H
-#define SWI_H
-
-	// SWI allocations
+	// SVC allocations
 	#define		OS_PrintString				0x00000000
 	#define		OS_PrintChar				0x00000001
 	#define		OS_ClearScreen				0x00000002
 	#define		OS_SetColour				0x00000003
-
-	#define		OS_ReadC                                0x00000004
-
+	#define		OS_ReadC                    0x00000004
 	#define		OS_ProcessBegin				0x00000005
 	#define		OS_ProcessExit				0x00000006
 
 
-
-#endif /*SWI_H*/
+#endif /*SVC_H*/

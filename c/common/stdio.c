@@ -15,10 +15,8 @@
  */
 
 
-
 #include "stdio.h"
-#include "swi.h"
-
+#include "svc.h"
 
 
 int printf( char *str )
@@ -26,15 +24,7 @@ int printf( char *str )
 
     unsigned int result;
 
-    __asm__ __volatile__ ( 
-    "MOV r0, %[str]      \n\t" 
-    "SWI %[swi]          \n\t"
-    "MOV %[result], r0   \n\t"
-    :   [result] "=r" ( result )                    /* output operands */
-    :   [str]    "r"  ( str ),                      /* input operands */
-        [swi]    "I"  ( OS_PrintString )
-    :                                               /* no clobber */
-    );
+    _SVC_CALL1( OS_PrintString, str );
 
     return (int) result;
 
@@ -45,9 +35,7 @@ int sprintf_i( char *s, int i )
 {
 
 	// just get it working for now
-	unsigned long int length;
-	unsigned long int divisor;
-	unsigned long int quotient;
+	unsigned long int length, divisor, quotient;
 	length = 0;
 
 	if ( i == 0 )
@@ -80,23 +68,17 @@ int sprintf_i( char *s, int i )
 
 }
 
+
 int getchar( void )
 {
 
-        unsigned int result;
+    unsigned int result;
 
-        __asm__ __volatile__ ( 
-        "SWI %[swi]          \n\t"
-        "MOV %[result], r0   \n\t"
-        :   [result] "=r" ( result )                    /* output operands */
-        :   [swi]    "I"  ( OS_ReadC )                  /* input operands */
-        :                                               /* no clobber */
-        );
+    _SVC_CALL0( OS_ReadC );
 
-        return (int) result;
+    return (int) result;
 
 }
-
 
 
 char *gets( char *s )
@@ -110,39 +92,39 @@ char *gets( char *s )
     {
 		
         next   = getchar();
-	render = 0;
+        render = 0;
 
-	if ( next == 0x0a )
-	{
-            s[index++] = 0x00;
-            line_terminated = 1;
-	}
-	else
-	{
-            if ( next == 0x7f )
-            {
-                if (index > 0)
-		{
-                    index--;
-                    render = 1;
-		}
-            }
-            else
-            {
-                if ( index < 255 )
-		{
-                    s[index++] = next;
-                    render = 1;
-		}
-            }
-	}
+        if ( next == 0x0a )
+        {
+                s[index++] = 0x00;
+                line_terminated = 1;
+        }
+        else
+        {
+                if ( next == 0x7f )
+                {
+                    if (index > 0)
+                    {
+                        index--;
+                        render = 1;
+                    }
+                }
+                else
+                {
+                    if ( index < 255 )
+                    {
+                        s[index++] = next;
+                        render = 1;
+                    }
+                }
+        }
 
-	if ( render )
-	{
+        if ( render )
+        {
             printme[0] = next;
             printme[1] = 0x00;
             printf( printme );
-	}
+        }
 		
     }
 
@@ -152,20 +134,12 @@ char *gets( char *s )
 }
 
 
-
 int setcolour( unsigned int f, unsigned int r, unsigned int g, unsigned int b )
 {
 
     unsigned int result;
 
-    // note: r0-r3 are already in place at this point
-    __asm__ __volatile__ ( 
-    "SWI %[swi]          \n\t"
-    "MOV %[result], r0   \n\t"
-    :   [result] "=r" ( result )                    /* output operands */
-    :       [swi]    "I"  ( OS_SetColour )
-    :                                               /* no clobber */
-    );
+    _SVC_CALL4( OS_SetColour, f, r, g, b );
 
     return (int) result;
 
@@ -178,14 +152,7 @@ int cls( void )
 
     unsigned int result;
 
-    // note: r0-r3 are already in place at this point
-    __asm__ __volatile__ ( 
-    "SWI %[swi]          \n\t"
-    "MOV %[result], r0   \n\t"
-    :   [result] "=r" ( result )                    /* output operands */
-    :   [swi]    "I"  ( OS_ClearScreen )
-    :                                               /* no clobber */
-    );
+    _SVC_CALL0( OS_ClearScreen );
 
     return (int) result;
 
