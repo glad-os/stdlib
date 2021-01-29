@@ -22,7 +22,7 @@
 int printf( char *str )
 {
 
-    unsigned int result;
+    unsigned long int result;
 
     _SVC_CALL1( OS_PrintString, str );
 
@@ -72,7 +72,7 @@ int sprintf_i( char *s, int i )
 int getchar( void )
 {
 
-    unsigned int result;
+    unsigned long int result;
 
     _SVC_CALL0( OS_ReadC );
 
@@ -134,10 +134,10 @@ char *gets( char *s )
 }
 
 
-int setcolour( unsigned int f, unsigned int r, unsigned int g, unsigned int b )
+int setcolour( unsigned long int f, unsigned long int r, unsigned long int g, unsigned long int b )
 {
 
-    unsigned int result;
+    unsigned long int result;
 
     _SVC_CALL4( OS_SetColour, f, r, g, b );
 
@@ -150,7 +150,8 @@ int setcolour( unsigned int f, unsigned int r, unsigned int g, unsigned int b )
 int cls( void )
 {
 
-    unsigned int result;
+    // KJS - "unsigned long int" is 32-bit in AArch32, and 64-bit in AArch64
+    unsigned long int result;
 
     _SVC_CALL0( OS_ClearScreen );
 

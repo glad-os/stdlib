@@ -23,71 +23,71 @@
     #define _SVC_CALL0( SVC_NUMBER )    \
         __asm__ __volatile__ (                  \
         "SVC %[svc]            \n\t"            \
-        "MOV %[result] , r0    \n\t"            \
+        "MOV %[result] , x0    \n\t"            \
         :   [result] "=r" ( result )            \
         :   [svc]    "I"  ( SVC_NUMBER )        \
         :                                       \
         );
 
 
-    #define _SVC_CALL1( SVC_NUMBER, R0 ) \
+    #define _SVC_CALL1( SVC_NUMBER, X0 ) \
         __asm__ __volatile__ (                  \
-        "MOV r0        , %[r0] \n\t"            \
+        "MOV x0        , %[x0] \n\t"            \
         "SVC %[svc]            \n\t"            \
-        "MOV %[result] , r0    \n\t"            \
+        "MOV %[result] , x0    \n\t"            \
         :   [result] "=r" ( result )            \
         :   [svc]    "I"  ( SVC_NUMBER ) ,      \
-            [r0]     "r"  (R0)                  \
+            [x0]     "r"  (X0)                  \
         :                                       \
         );
 
 
-    #define _SVC_CALL2( SVC_NUMBER, R0, R1 ) \
+    #define _SVC_CALL2( SVC_NUMBER, X0, X1 ) \
         __asm__ __volatile__ (                  \
-        "MOV r0        , %[r0] \n\t"            \
-        "MOV r1        , %[r1] \n\t"            \
+        "MOV x0        , %[x0] \n\t"            \
+        "MOV x1        , %[x1] \n\t"            \
         "SVC %[svc]            \n\t"            \
-        "MOV %[result] , r0    \n\t"            \
+        "MOV %[result] , x0    \n\t"            \
         :   [result] "=r" ( result )            \
         :   [svc]    "I"  ( SVC_NUMBER ) ,      \
-            [r1]     "r"  (R1)  ,               \
-            [r0]     "r"  (R0)                  \
+            [x0]     "r"  (X0)  ,               \
+            [x1]     "r"  (X1)                  \
         :                                       \
         );
 
 
-    #define _SVC_CALL3( SVC_NUMBER, R0, R1, R2 ) \
+    #define _SVC_CALL3( SVC_NUMBER, X0, X1, X2 ) \
         __asm__ __volatile__ (                  \
-        "MOV r0        , %[r0] \n\t"            \
-        "MOV r1        , %[r1] \n\t"            \
-        "MOV r2        , %[r2] \n\t"            \
+        "MOV x0        , %[x0] \n\t"            \
+        "MOV x1        , %[x1] \n\t"            \
+        "MOV x2        , %[x2] \n\t"            \
         "SVC %[svc]            \n\t"            \
-        "MOV %[result] , r0    \n\t"            \
+        "MOV %[result] , x0    \n\t"            \
         :   [result] "=r" ( result )            \
         :   [svc]    "I"  ( SVC_NUMBER ) ,      \
-            [r2]     "r"  (R2)  ,               \
-            [r1]     "r"  (R1)  ,               \
-            [r0]     "r"  (R0)                  \
+            [x0]     "r"  (X0)  ,               \
+            [x1]     "r"  (X1)  ,               \
+            [x2]     "r"  (X2)                  \
         :                                       \
         );
 
 
-    // KJS - not clear why but I have to list inputs in reverse order
-    // or the assembly generated breaks (mov r0,r3; mov r1,r2; mov r2,r1; mov r3,r0)!
-    #define _SVC_CALL4( SVC_NUMBER, R0, R1, R2, R3 ) \
+    // KJS - not clear why but with AArch64, unlike AArch32, the inputs
+    // here must be listed in the *correct* order (or we get "mov x0,x3; mov x1,x2; mov x2,x1; mov x3,x0")!
+    #define _SVC_CALL4( SVC_NUMBER, X0, X1, X2, X3 ) \
         __asm__ __volatile__ (                  \
-        "MOV r0        , %[r0] \n\t"            \
-        "MOV r1        , %[r1] \n\t"            \
-        "MOV r2        , %[r2] \n\t"            \
-        "MOV r3        , %[r3] \n\t"            \
+        "MOV x0        , %[x0] \n\t"            \
+        "MOV x1        , %[x1] \n\t"            \
+        "MOV x2        , %[x2] \n\t"            \
+        "MOV x3        , %[x3] \n\t"            \
         "SVC %[svc]            \n\t"            \
-        "MOV %[result] , r0    \n\t"            \
+        "MOV %[result] , x0    \n\t"            \
         :   [result] "=r" ( result )            \
         :   [svc]    "I"  ( SVC_NUMBER ) ,      \
-            [r3]     "r"  (R3)  ,               \
-            [r2]     "r"  (R2)  ,               \
-            [r1]     "r"  (R1)  ,               \
-            [r0]     "r"  (R0)                  \
+            [x0]     "r"  (X0)  ,               \
+            [x1]     "r"  (X1)  ,               \
+            [x2]     "r"  (X2)  ,               \
+            [x3]     "r"  (X3)                  \
         :                                       \
         );
 
