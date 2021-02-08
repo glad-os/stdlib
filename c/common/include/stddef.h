@@ -18,15 +18,8 @@
 #ifndef STDDEF_H
 #define STDDEF_H
 
-    // @TODO - KJS - these types need solidifying and aligning between both platforms
-    // I almost need this idea of a "native" unsigned int thing? Because I am referencing
-    // "uint32_t" in BASIC, but when doing "make 64-bit" it's throwing warnings, which I'd 
-    // really like to get on top of. So let's take a step back and our next step here is going 
-    // to be making sure that not only is stdlib building CLEANLY for 32/64 bit, but also 
-    // BASIC is suitably building with the right sizes of things here.
 
-    typedef unsigned char uint8_t;
-    typedef unsigned int  uint32_t;
-    typedef uint32_t      uintmax_t;
+    typedef unsigned long int   uintptr_t;
+
 
 #endif /*STDDEF_H*/
